@@ -4,7 +4,7 @@ resource "aws_key_pair" "main" {
 }
 
 # Create the server
-resource "aws_instance" "servertwo" {
+resource "aws_instance" "main" {
   ami = "ami-002068ed284fb165b"
 
   instance_type    = "t3.2xlarge"
@@ -25,14 +25,14 @@ resource "aws_instance" "servertwo" {
     ]
   }
   tags = {
-    Name = "gaming_server_two"
+    Name = "gaming_server"
   }
 }
 
-resource "aws_eip" "servertwo" {
+resource "aws_eip" "main" {
   vpc = true
 
-  instance   = aws_instance.servertwo.id
+  instance   = aws_instance.main.id
   depends_on = [aws_internet_gateway.infra]
 }
 
